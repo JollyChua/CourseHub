@@ -1,0 +1,10 @@
+{
+    "/api": {
+        "target": "https://dog.ceo/api/breeds/image/random",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+        }
+    }
+}

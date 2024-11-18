@@ -1,25 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ApiService } from './api.service';
-import { UserService } from './services/user.service';
-import { CommonModule } from '@angular/common';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'courseHub';
 
-  posts: any[] = [];
-  newPost = { title: 'Angular API', body: 'Integrating API with Angular' };
+  data: any[] = [];
 
-  constructor(private apiService: ApiService) {}
+  constructor(private dataService: DataService) {}
+
+  /* ngOnInit(): void {
+    this.dataService.fetchData().subscribe({
+      next: (response) => {
+        this.data = response as any[];
+        console.log(this.data);
+      },
+      error: (error) => {
+        console.error("Error:", error);
+      }
+    });
+  } */
+
+ /*  ngOnInit() {
+    this.dataService.fetchData().subscribe(response => {
+      this.data = response as any[];
+    });
+  } */
 
   ngOnInit(): void {
-    // Fetching data on component initialization
+    this.dataService.getData().subscribe({
+      next: (data) => {
+        this.data = data.data,
+        console.log(data)
+      },
+      error: (console) => console.error("Error: ", Error)
+    });
   }
+
 }
